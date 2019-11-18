@@ -19,7 +19,7 @@ temp_file="/tmp/${base_file}.tmp"
 diff_file="/tmp/${base_file}.diff"
 
 if [ -e "$temp_file" ]; then
-    diff <(grep "$regex" "$temp_file") <(grep "$regex" "$path_file") > "$diff_file"
+    diff <(grep -P "$regex" "$temp_file") <(grep -P "$regex" "$path_file") > "$diff_file"
     if [ $? -ne 0 ]; then
         mutt -s "${base_file} update" "$email" < "$diff_file"
     fi
